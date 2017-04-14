@@ -1,0 +1,49 @@
+{% extends "AppBundle::layout1.html.twig" %}
+
+{% block title %}Affiche tous les oiseaux{% endblock %}
+
+{% block body %}
+    <h1>Affichage des oiseaux.</h1>
+    <br>
+
+    <div class="count">
+        <p>Total d'oiseaux : {{ pagination.getTotalItemCount }}</p>
+    </div>
+    <br>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>{{ knp_pagination_sortable(pagination, 'Nom', 'taxrefv10.LbNom') }}</th>
+            <th>{{ knp_pagination_sortable(pagination, 'Famille', 'taxrefv10.Famille') }}</th>
+            <th>{{ knp_pagination_sortable(pagination, 'Nom complet', 'taxrefv10.NomComplet') }}</th>
+            <th>{{ knp_pagination_sortable(pagination, 'Nom Vern', 'taxrefv10.NomVern') }}</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for oiseau in pagination %}
+            <tr {% if loop.index is odd %}class="color"{% endif %}>
+                <td>{{ oiseau.LbNom }}</td>
+                <td>{{ oiseau.Famille }}</td>
+                <td>{{ oiseau.NomComplet }}</td>
+                <td>{{ oiseau.NomVern }}</td>
+                <td>
+                    <p>
+                        <a class="btn btn-primary btn-xs" href="#">Voir la fiche</a>
+                    </p>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+
+
+            <div class="navigation">
+                {{ knp_pagination_render(pagination) }}
+            </div>
+
+{% endblock %}
+
+
+
