@@ -30,7 +30,7 @@ class DefaultController extends Controller
         $pagination = $paginator->paginate(
             $em->getRepository('AppBundle:Taxrefv10')->getAll(), /* query NOT result */
             $page/*page number*/,
-            10/*limit per page*/
+            100/*limit per page*/
         );
 
         dump($pagination);
