@@ -5,15 +5,9 @@
 {% block stylesheets %}{% endblock %}
 
 {% block body %}
-
-    <div class="container">
-        <div class="row">
-            <div class="well">
-
-                <br />
-                <p><a class="btn btn-primary btn-sm" href="{{ path('view_all', {'page': 1}) }}" role="button"><span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>&nbsp; Voir les oiseaux</a></p>
-            </div>
-        </div>
+    <div class="well">
+        <br />
+        <p><a class="btn btn-primary btn-sm" href="{{ path('view_all', {'page': 1}) }}" role="button"><span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>&nbsp; Voir les oiseaux</a></p>
     </div>
 {% endblock %}
 

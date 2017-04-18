@@ -1,12 +1,11 @@
 <?php
 
-namespace AppBundle\ToolsBox;
-
+namespace AppBundle\Services;
 
 use AppBundle\Entity\Configuration;
 use Doctrine\ORM\EntityManagerInterface;
 
-class ToolsBox
+class LoadConfig
 {
 
     private $em;

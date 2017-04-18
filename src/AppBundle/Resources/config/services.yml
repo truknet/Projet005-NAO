@@ -1,5 +1,11 @@
 services:
-    app.toolsbox:
-        class: AppBundle\ToolsBox\ToolsBox
+    services.loadconfig:
+        class: AppBundle\Services\LoadConfig
         arguments:
             - "@doctrine.orm.entity_manager"
+
+    app.sendEmail:
+        class: AppBundle\Services\SendEmail
+        arguments:
+            - "@templating"
+            - "@mailer"

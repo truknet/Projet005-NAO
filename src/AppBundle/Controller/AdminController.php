@@ -32,7 +32,7 @@ class AdminController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         // Récuperation de la configuration
-        $config = $this->container->get('app.toolsbox')->loadConfig();
+        $config = $this->container->get('services.loadconfig')->loadConfig();
         $form = $this->get('form.factory')->create(ConfigurationType::class, $config);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {

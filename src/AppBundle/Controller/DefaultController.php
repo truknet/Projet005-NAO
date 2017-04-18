@@ -3,8 +3,11 @@
 namespace AppBundle\Controller;
 
 
+use AppBundle\Entity\Contact;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use AppBundle\Form\ContactType;
 
 
 class DefaultController extends Controller
@@ -30,7 +33,7 @@ class DefaultController extends Controller
         $pagination = $paginator->paginate(
             $em->getRepository('AppBundle:Taxrefv10')->getAll(), /* query NOT result */
             $page/*page number*/,
-            100/*limit per page*/
+            25/*limit per page*/
         );
 
         dump($pagination);
@@ -39,6 +42,36 @@ class DefaultController extends Controller
             'pagination' => $pagination,
         ));
     }
+
+    /**
+     * @Route("/contact", name="modal_contact")
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function modalContactAction(Request $request)
+    {
+        $contact = new Contact();
+        $form = $this->get('form.factory')->create(ContactType::class, $contact);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            // Affichage d'un message flash
+            $request->getSession()->getFlashBag()->add('success', 'Votre message à bien été envoyé !');
+            // Sauvegarder en Base de données
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($contact);
+            $em->flush();
+            // Envoyer le mail
+            $this->container->get('app.sendEmail')->sendEmail($contact);
+            // Vider l'objet contact
+            $contact = null;
+            // Retour à la page d'accueil
+            return $this->render('AppBundle:Front:index.html.twig');
+        }
+        return $this->render('AppBundle:Front:modalContact.html.twig', array(
+            'form' => $form->createView(),
+        ));
+    }
+
 
 
 

@@ -8,40 +8,33 @@
     <link rel="stylesheet" href="{{ asset(''~ config.loadConfig.theme ) }}" />
     <link rel="stylesheet" href="{{ asset('css/font-awesome-4.7.0/css/font-awesome.min.css') }}" />
     <link rel="stylesheet" href="{{ asset('css/css.css') }}" />
-
     {% block stylesheets %}{% endblock %}
-
 </head>
 <body>
-<div class="container">
-    {% block navbar %}{{ include("AppBundle:Front:navbar.html.twig") }}{% endblock %}
-    {# On affiche tous les messages flash #}
-    {% for key, messages in app.session.flashbag.all() %}
-        {% for message in messages %}
-            <div class="alert alert-{{ key }}">
-                {{ message }}
-            </div>
-        {% endfor %}
-    {% endfor %}
-</div>
-
-{% block body %}{% endblock %}
-
-<footer class="footer">
+{% block navbar %}{{ include("AppBundle:Front:navbar.html.twig") }}{% endblock %}
     <div class="container">
-        <p>&copy;2017 Projet 5 - NAO / <a href="{{ path('admin') }}">Administration</a></p>
+
+
+        {{ include("AppBundle:Front:carrousel.html.twig") }}
+
+        {# On affiche tous les messages flash #}
+        {% for key, messages in app.session.flashbag.all() %}
+            {% for message in messages %}
+                <div class="alert alert-{{ key }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endfor %}
+        {% block body %}{% endblock %}
     </div>
-</footer>
-
-<div class="cRetour"></div>
-
-{% block javascript %}{% endblock %}
-
-<script src="https://code.jquery.com/jquery.min.js"></script>
-<script src="{{ asset('js/bootstrap.min.js') }}"></script>
-<script src="{{ asset('js/button_retour.js') }}"></script>
 
 
+    {{ render(controller('AppBundle:Default:modalContact')) }}
+    {{ include("AppBundle:Front:footer.html.twig") }}
 
+    {% block javascript %}{% endblock %}
+    <script src="https://code.jquery.com/jquery.min.js"></script>
+    <script src="{{ asset('js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('js/button_retour.js') }}"></script>
 </body>
 </html>

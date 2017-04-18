@@ -41,7 +41,7 @@ twig:
     form_themes:
         - 'bootstrap_3_layout.html.twig'
     globals:
-            config: '@app.toolsbox'
+            config: '@services.loadconfig'
 
 # Doctrine Configuration
 doctrine:
@@ -79,7 +79,10 @@ fos_user:
     user_class:    UserBundle\Entity\User # La classe de l'entité User que nous utilisons
     from_email:
         address:        info@email.com
-        sender_name:    App
+        sender_name:    Nos Amis les Oiseaux
+    registration:
+            confirmation:
+                enabled: true
 
 
 stfalcon_tinymce:
