@@ -1,7 +1,9 @@
 /var/*
 /vendor/
 /web/bundles/
-/.idea/*
+/.idea/
 composer.phar
 composer.lock
-/app/config/parameters.yml.dist
+/app/config/parameters.yml
+/app/config/parameters.yml.serveur
+

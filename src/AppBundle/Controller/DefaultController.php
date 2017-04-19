@@ -36,8 +36,6 @@ class DefaultController extends Controller
             25/*limit per page*/
         );
 
-        dump($pagination);
-
         return $this->render('AppBundle:Front:viewAll.html.twig', array(
             'pagination' => $pagination,
         ));
@@ -61,7 +59,7 @@ class DefaultController extends Controller
             $em->persist($contact);
             $em->flush();
             // Envoyer le mail
-            $this->container->get('app.sendEmail')->sendEmail($contact);
+            $this->container->get('app.sendEmail')->sendEmailContact($contact);
             // Vider l'objet contact
             $contact = null;
             // Retour à la page d'accueil
@@ -73,7 +71,23 @@ class DefaultController extends Controller
     }
 
 
+    /**
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @Route("/sidebarsearch") name="side_bar_search")
+     */
+    public function sideBarSearchAction()
+    {
+        return $this->render('AppBundle:Front:sideBarSearch.html.twig');
+    }
 
+    /**
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @Route("/sidebarnewsletter") name="side_bar_newsletter")
+     */
+    public function sideBarNewsletterAction()
+    {
+        return $this->render('AppBundle:Front:sideBarNewsletter.html.twig');
+    }
 
     /**
      * @return \Symfony\Component\HttpFoundation\Response

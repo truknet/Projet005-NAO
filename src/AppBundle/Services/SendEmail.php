@@ -24,19 +24,35 @@ class SendEmail
      * @param Contact $contact
      *
      */
-    public function sendEmail(Contact $contact)
+    public function sendEmailContact(Contact $contact)
     {
+        // Envoie de l'email à l'Admin
         $message = \Swift_Message::newInstance()
             ->setSubject('Message de NAO')
-            ->setFrom(array('info@trukotop.com' => 'Association NAO'))
+            ->setFrom(array('info@nao.com' => 'Association NAO'))
             ->setTo('info@trukotop.com')
             ->setCharset('utf-8')
             ->setContentType('text/html')
             ->setBody(
-                $this->templating->render('Emails/contactEmail.html.twig', array('contact' => $contact)),
+                $this->templating->render('Emails/contactEmailAdmin.html.twig', array('contact' => $contact)),
                 'text/html'
             )
         ;
         $this->mailer->send($message);
+
+        // Envoie de l'email à l'Utilisateur
+        $message = \Swift_Message::newInstance()
+            ->setSubject('Message de NAO')
+            ->setFrom(array('info@nao.com' => 'Association NAO'))
+            ->setTo($contact->getEmail())
+            ->setCharset('utf-8')
+            ->setContentType('text/html')
+            ->setBody(
+                $this->templating->render('Emails/contactEmailUser.html.twig', array('contact' => $contact)),
+                'text/html'
+            )
+        ;
+        $this->mailer->send($message);
+
     }
 }

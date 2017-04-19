@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  127.0.0.1
--- Généré le :  Ven 14 Avril 2017 à 17:44
+-- Généré le :  Mar 18 Avril 2017 à 13:14
 -- Version du serveur :  5.7.9
 -- Version de PHP :  7.0.0
 
@@ -19,28 +19,6 @@ SET time_zone = "+00:00";
 --
 -- Base de données :  `projet005`
 --
-
--- --------------------------------------------------------
-
---
--- Structure de la table `configuration`
---
-
-DROP TABLE IF EXISTS `configuration`;
-CREATE TABLE IF NOT EXISTS `configuration` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `theme` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `themeadmin` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
---
--- Contenu de la table `configuration`
---
-
-INSERT INTO `configuration` (`id`, `name`, `theme`, `themeadmin`) VALUES
-(1, 'config1', 'css/bootstrap-cerulean/bootstrap.min.css', 'css/bootstrap-slate/bootstrap.min.css');
 
 -- --------------------------------------------------------
 
@@ -5173,39 +5151,6 @@ INSERT INTO `taxrefv10` (`id`, `regne`, `phylum`, `classe`, `ordre`, `famille`, 
 (5032, 'Animalia', 'Chordata', 'Aves', 'Trogoniformes', 'Trogonidae', 'Chordés', 'Oiseaux', 442477, 440653, 440653, 442477, 'ES', 'Trogon rufus', 'Gmelin, 1788', 'Trogon rufus Gmelin, 1788', '<i>Trogon rufus</i> Gmelin, 1788', 'Trogon rufus Gmelin, 1788', 'Trogon aurore ', '', 3, '', 'P', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'https://inpn.mnhn.fr/espece/cd_nom/442477'),
 (5033, 'Animalia', 'Chordata', 'Aves', 'Trogoniformes', 'Trogonidae', 'Chordés', 'Oiseaux', 442478, 440653, 440653, 442478, 'ES', 'Trogon violaceus', 'Gmelin, 1788', 'Trogon violaceus Gmelin, 1788', '<i>Trogon violaceus</i> Gmelin, 1788', 'Trogon violaceus Gmelin, 1788', 'Trogon violacé ', '', 3, '', 'P', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'https://inpn.mnhn.fr/espece/cd_nom/442478'),
 (5034, 'Animalia', 'Chordata', 'Aves', 'Trogoniformes', 'Trogonidae', 'Chordés', 'Oiseaux', 442479, 440653, 440653, 442479, 'ES', 'Trogon viridis', 'Linnaeus, 1766', 'Trogon viridis Linnaeus, 1766', '<i>Trogon viridis</i> Linnaeus, 1766', 'Trogon viridis Linnaeus, 1766', 'Trogon à queue blanche ', '', 3, '', 'P', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'https://inpn.mnhn.fr/espece/cd_nom/442479');
-
--- --------------------------------------------------------
-
---
--- Structure de la table `user`
---
-
-DROP TABLE IF EXISTS `user`;
-CREATE TABLE IF NOT EXISTS `user` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `username` varchar(180) COLLATE utf8_unicode_ci NOT NULL,
-  `username_canonical` varchar(180) COLLATE utf8_unicode_ci NOT NULL,
-  `email` varchar(180) COLLATE utf8_unicode_ci NOT NULL,
-  `email_canonical` varchar(180) COLLATE utf8_unicode_ci NOT NULL,
-  `enabled` tinyint(1) NOT NULL,
-  `salt` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `password` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `last_login` datetime DEFAULT NULL,
-  `confirmation_token` varchar(180) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `password_requested_at` datetime DEFAULT NULL,
-  `roles` longtext COLLATE utf8_unicode_ci NOT NULL COMMENT '(DC2Type:array)',
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `UNIQ_8D93D64992FC23A8` (`username_canonical`),
-  UNIQUE KEY `UNIQ_8D93D649A0D96FBF` (`email_canonical`),
-  UNIQUE KEY `UNIQ_8D93D649C05FB297` (`confirmation_token`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
---
--- Contenu de la table `user`
---
-
-INSERT INTO `user` (`id`, `username`, `username_canonical`, `email`, `email_canonical`, `enabled`, `salt`, `password`, `last_login`, `confirmation_token`, `password_requested_at`, `roles`) VALUES
-(1, 'admin', 'admin', 'admin@admin.com', 'admin@admin.com', 1, 'ucBB0gtigmRydz8FrTx4jGaz0fXwxIgRMdCTMEXqZD4', '2dxMH4r8wo7BaQfGQBNyydwJ6z5ti2C1i3l5IxzGX/leZLqFmQP/k/xkkVuwTWtT2+blQQ+yHp1lC9h/TjEUcg==', '2017-04-13 16:32:07', NULL, NULL, 'a:1:{i:0;s:10:"ROLE_ADMIN";}');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
