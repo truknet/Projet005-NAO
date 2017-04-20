@@ -41,10 +41,11 @@ class DefaultController extends Controller
 
     /**
      * @Route("/learnmore", name="learn_more")
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function learnMoreAction()
     {
-        return $this->render('AppBundle:Front:learnmore.html.twig');
+        return $this->render('AppBundle:Front:learnMore.html.twig');
     }
 
 
