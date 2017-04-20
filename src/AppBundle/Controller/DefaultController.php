@@ -40,6 +40,15 @@ class DefaultController extends Controller
     }
 
     /**
+     * @Route("/learnmore", name="learn_more")
+     */
+    public function learnMoreAction()
+    {
+        return $this->render('AppBundle:Front:learnmore.html.twig');
+    }
+
+
+    /**
      * @Route("/contact", name="modal_contact")
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response

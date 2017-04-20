@@ -3,6 +3,7 @@ OpenClassRoom - Projet 5 - NAO
 
 Projet de création de site
 
+20/04/2017 : Modif page d'accueil + mise en place page "En savoir plus"<br>
 20/04/2017 : Création et Modifs des Entity + Relations<br>
 19/04/2017 : Modifications mineures / Refactoring<br>
 18/04/2017 : Mise en place du Formulaire de contact en Modal<br>
