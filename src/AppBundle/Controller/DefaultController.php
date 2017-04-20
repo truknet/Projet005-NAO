@@ -28,14 +28,12 @@ class DefaultController extends Controller
     public function viewAllAction($page)
     {
         $em = $this->getDoctrine()->getManager();
-
         $paginator  = $this->get('knp_paginator');
         $pagination = $paginator->paginate(
             $em->getRepository('AppBundle:Taxrefv10')->getAll(), /* query NOT result */
             $page/*page number*/,
             25/*limit per page*/
         );
-
         return $this->render('AppBundle:Front:viewAll.html.twig', array(
             'pagination' => $pagination,
         ));
@@ -70,10 +68,9 @@ class DefaultController extends Controller
         ));
     }
 
-
     /**
      * @return \Symfony\Component\HttpFoundation\Response
-     * @Route("/sidebarsearch") name="side_bar_search")
+     * @Route("/sidebarsearch", name="side_bar_search")
      */
     public function sideBarSearchAction()
     {
@@ -82,7 +79,7 @@ class DefaultController extends Controller
 
     /**
      * @return \Symfony\Component\HttpFoundation\Response
-     * @Route("/sidebarnewsletter") name="side_bar_newsletter")
+     * @Route("/sidebarnewsletter", name="side_bar_newsletter")
      */
     public function sideBarNewsletterAction()
     {
@@ -91,11 +88,20 @@ class DefaultController extends Controller
 
     /**
      * @return \Symfony\Component\HttpFoundation\Response
-     * @Route("/sidebarlast") name="side_bar_last")
+     * @Route("/sidebarlast", name="side_bar_last")
      */
     public function sideBarLastAction()
     {
         return $this->render('AppBundle:Front:sideBarLast.html.twig');
+    }
+
+    /**
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @Route("/googlemap", name="google_map")
+     */
+    public function googleMapAction()
+    {
+        return $this->render('AppBundle:Front:googleMap.html.twig');
     }
 
 }

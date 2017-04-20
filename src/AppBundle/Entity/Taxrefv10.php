@@ -22,6 +22,11 @@ class Taxrefv10
     private $id;
 
     /**
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Observation", mappedBy="espece")
+     */
+    private $observations;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="regne", type="string", length=255)
@@ -286,6 +291,7 @@ class Taxrefv10
      * @ORM\Column(name="url", type="string", length=255)
      */
     private $Url;
+
 
 
     /**
@@ -1208,5 +1214,46 @@ class Taxrefv10
     public function getUrl()
     {
         return $this->Url;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->observations = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add observation
+     *
+     * @param \AppBundle\Entity\Observation $observation
+     *
+     * @return Taxrefv10
+     */
+    public function addObservation(\AppBundle\Entity\Observation $observation)
+    {
+        $this->observations[] = $observation;
+
+        return $this;
+    }
+
+    /**
+     * Remove observation
+     *
+     * @param \AppBundle\Entity\Observation $observation
+     */
+    public function removeObservation(\AppBundle\Entity\Observation $observation)
+    {
+        $this->observations->removeElement($observation);
+    }
+
+    /**
+     * Get observations
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getObservations()
+    {
+        return $this->observations;
     }
 }

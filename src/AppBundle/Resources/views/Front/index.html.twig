@@ -5,9 +5,106 @@
 {% block stylesheets %}{% endblock %}
 
 {% block body %}
-    <div class="well">
-        <br />
-        <p><a class="btn btn-primary btn-sm" href="{{ path('view_all', {'page': 1}) }}" role="button"><span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>&nbsp; Voir les oiseaux</a></p>
+
+
+
+    <div class="container">
+
+        <div class="well">
+            <h3>Les dernières observations</h3>
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Obs 1</h3>
+                        </div>
+                        <div class="panel-body">
+                            <ul>
+                                <li>Nom  : .....</li>
+                                <li>Date : .....</li>
+                                <li>Coordonnées GPS : ..........</li>
+                            </ul>
+                            <a href="#"><span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>&nbsp;&nbsp;Voir la fiche</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Obs 2</h3>
+                        </div>
+                        <div class="panel-body">
+                            <ul>
+                                <li>Nom  : .....</li>
+                                <li>Date : .....</li>
+                                <li>Coordonnées GPS : ..........</li>
+                            </ul>
+                            <a href="#"><span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>&nbsp;&nbsp;Voir la fiche</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Obs 3</h3>
+                        </div>
+                        <div class="panel-body">
+                            <ul>
+                                <li>Nom  : .....</li>
+                                <li>Date : .....</li>
+                                <li>Coordonnées GPS : ..........</li>
+                            </ul>
+                            <a href="#"><span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>&nbsp;&nbsp;Voir la fiche</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="well content-block">
+                    <h3>L'association NAO</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce augue augue, blandit rutrum massa eu, molestie scelerisque magna. Duis ut mi id nisl convallis semper eget et magna. Donec finibus interdum odio, vel viverra neque porttitor ut. Aenean vitae diam sit amet nunc ultricies commodo. Pellentesque vitae augue suscipit, hendrerit massa vitae, pharetra nulla. Nullam nisl nisi, vehicula nec consequat sit amet, tempor maximus nisi. Aenean in sollicitudin dui. </p>
+                    <a class="btn btn-primary btn-sm" href="#" data-toggle="modal" data-target="#modalContact" >Contactez nous !</a>
+                    <a class="btn btn-primary btn-sm" href="#">En savoir plus</a>
+                </div>
+            </div>
+
+            <div class="col-sm-6">
+                <div class="well content-block">
+                    <h3>La Newsletter</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce augue augue, blandit rutrum massa eu, molestie scelerisque magna. Duis ut mi id nisl convallis semper eget et magna. Donec finibus interdum odio, vel viverra neque porttitor ut. </p>
+                    <form class="form-inline">
+                        <div class="form-group">
+                            <label for="exampleInputEmail2">Indiquer votre Email</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control" id="exampleInputAmount" placeholder="email@email.com">
+                                <div class="input-group-addon">Ok</div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="well content-block">
+                    <h3>Particuliers / Passionnés</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce augue augue, blandit rutrum massa eu, molestie scelerisque magna. Duis ut mi id nisl convallis semper eget et magna. Donec finibus interdum odio, vel viverra neque porttitor ut. </p>
+                    <a class="btn btn-primary btn-sm" href="{{ path('fos_user_registration_register') }}">{{ 'layout.register'|trans({}, 'FOSUserBundle') }}</a>
+                </div>
+            </div>
+
+            <div class="col-sm-6">
+                <div class="well content-block">
+                    <h3>Professionnels / Naturalistes</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce augue augue, blandit rutrum massa eu, molestie scelerisque magna. Duis ut mi id nisl convallis semper eget et magna. Donec finibus interdum odio, vel viverra neque porttitor ut. </p>
+                    <a class="btn btn-primary btn-sm" href="{{ path('fos_user_registration_register') }}">{{ 'layout.register'|trans({}, 'FOSUserBundle') }}</a>
+                </div>
+            </div>
+        </div>
     </div>
 {% endblock %}
 

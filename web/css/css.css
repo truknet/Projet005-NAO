@@ -66,9 +66,12 @@ h2 {
 .carousel {
     padding-bottom: 15px;
 }
-
-
-
+.content-block {
+    min-height: 300px;
+}
+.flex {
+    display: flex;
+}
 
 
 
