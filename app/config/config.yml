@@ -81,8 +81,13 @@ fos_user:
         address:        info@email.com
         sender_name:    Nos Amis les Oiseaux
     registration:
-            confirmation:
-                enabled: true
+        form:
+            type: UserBundle\Form\RegistrationType
+        confirmation:
+            enabled: true
+    profile:
+        form:
+            type: UserBundle\Form\ProfileType
 
 
 stfalcon_tinymce:
@@ -110,7 +115,7 @@ knp_paginator:
         distinct: true                 # ensure distinct results, useful when ORM queries are using GROUP BY statements
     template:
         pagination: AppBundle:Pagination:twitter_bootstrap_v3_pagination.html.twig
-        sortable: KnpPaginatorBundle:Pagination:sortable_link.html.twig # sort link template
+        sortable: AppBundle:Pagination:sortable_link.html.twig # sort link template
 
 services:
     twig.extension.text:

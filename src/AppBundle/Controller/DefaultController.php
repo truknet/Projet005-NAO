@@ -4,6 +4,7 @@ namespace AppBundle\Controller;
 
 
 use AppBundle\Entity\Contact;
+use AppBundle\Entity\Taxrefv10;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -36,6 +37,18 @@ class DefaultController extends Controller
         );
         return $this->render('AppBundle:Front:viewAll.html.twig', array(
             'pagination' => $pagination,
+        ));
+    }
+
+    /**
+     * @Route("/viewonebird/{id}", name="view_one_bird")
+     * @param $taxrefv10
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function viewOneBirdAction(Taxrefv10 $taxrefv10)
+    {
+        return $this->render('AppBundle:Front:viewOneBird.html.twig', array(
+            'taxrefv10' => $taxrefv10,
         ));
     }
 

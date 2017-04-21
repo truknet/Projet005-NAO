@@ -1,11 +1,8 @@
 {% extends "AppBundle::layout1.html.twig" %}
-
 {% block title %}Affiche tous les oiseaux{% endblock %}
-
 {% block body %}
     <h1>Affichage des oiseaux.</h1>
     <br>
-
     <div class="center">
         <p>Total d'oiseaux : {{ pagination.getTotalItemCount }}</p>
     </div>
@@ -13,10 +10,10 @@
     <table class="table table-striped">
         <thead>
         <tr>
-            <th>{{ knp_pagination_sortable(pagination, 'Nom', 'taxrefv10.LbNom') }}</th>
+            <th>{{ knp_pagination_sortable(pagination, 'Nom' , 'taxrefv10.LbNom') }}</th>
             <th>{{ knp_pagination_sortable(pagination, 'Famille', 'taxrefv10.Famille') }}</th>
             <th>{{ knp_pagination_sortable(pagination, 'Nom complet', 'taxrefv10.NomComplet') }}</th>
-            <th>{{ knp_pagination_sortable(pagination, 'Nom Vern', 'taxrefv10.NomVern') }}</th>
+            <th>{{ knp_pagination_sortable(pagination, 'Nom Vern', 'taxrefv10.NomVern')|raw }}</th>
             <th></th>
         </tr>
         </thead>
@@ -29,20 +26,16 @@
                 <td>{{ oiseau.NomVern }}</td>
                 <td>
                     <p>
-                        <a class="btn btn-primary btn-xs" href="#">Voir la fiche</a>
+                        <a class="btn btn-primary btn-xs" href="{{ path('view_one_bird', {'id': oiseau.id}) }}">Voir la fiche</a>
                     </p>
                 </td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
-
-
-
     <div class="navigation">
         {{ knp_pagination_render(pagination) }}
     </div>
-
 {% endblock %}
 
 

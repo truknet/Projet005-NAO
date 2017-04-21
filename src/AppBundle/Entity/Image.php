@@ -50,7 +50,7 @@ class Image
     private $altImage;
 
     /**
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Observation", mappedBy="images")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Observation", inversedBy="images")
      */
     private $observation;
 
