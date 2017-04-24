@@ -3,14 +3,19 @@
 {% block body %}
     <h1>Gestion utilisateurs</h1>
     <br />
+    {{ dump(users) }}
+
     <table class="table table-striped">
         <thead>
         <tr>
             <th>Id</th>
             <th>Email</th>
             <th>Nom utilisateur</th>
+            <th>Nom</th>
+            <th>Dernière connexion</th>
             <th>Actif</th>
             <th>Role</th>
+            <th>Groupe</th>
             <th></th>
         </tr>
         </thead>
@@ -20,24 +25,34 @@
                     <td>{{ user.id }}</td>
                     <td>{{ user.email }}</td>
                     <td>{{ user.username }}</td>
-                    <td>{{ user.enabled }}</td>
+                    <td>{{ user.name }}</td>
+                    <td>{{ user.lastlogin|date("d/m/Y") }}</td>
                     <td>
-                        {% for role in user.roles %}
-                            {{ role }}<br>
-                        {% endfor %}
+                        {% if  user.enabled == 0 %}
+                            <a href="{{ path('admin_activate_user', {'username': user.username}) }}" data-toggle="tooltip" title="Activer"><i class="fa fa-toggle-off" aria-hidden="true"></i></a>
+                        {% else %}
+                            <a href="{{ path('admin_activate_user', {'username': user.username}) }}" data-toggle="tooltip" title="Désactiver"><i class="fa fa-toggle-on" aria-hidden="true"></i></a>
+                        {% endif %}
                     </td>
                     <td>
+                        {% if  user.roles[0] == 'ROLE_SUPER_ADMIN' %}Super Admin{% endif %}
+                        {% if  user.roles[0] == 'ROLE_MODERATEUR' %}Modérateur{% endif %}
+                        {% if  user.roles[0] == 'ROLE_USERNAT' %}Naturaliste{% endif %}
+                        {% if  user.roles[0] == 'ROLE_USER' %}Particulier{% endif %}
+                    </td>
+                    <td></td>
+                    <td>
                         <p>
-                            <a class="btn btn-primary btn-xs boutonedit" href="{{ path('admin_edit_user', {'id': user.id}) }}">Editer</a>
-                            <a class="btn btn-primary btn-xs boutondel" href="{{ path('admin_delete_user', {'username': user.username}) }}">Supprimer</a>
-                            <a class="btn btn-primary btn-xs boutondel" href="{{ path('admin_activate_user', {'username': user.username}) }}">Activer/Désactiver</a>
-                            <a class="btn btn-primary btn-xs boutondel" href="{{ path('fos_user_change_password') }}">Changer Mot de passe</a>
+                            <a href="{{ path('admin_edit_user', {'id': user.id}) }}"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                            <a href="{{ path('admin_delete_user', {'username': user.username}) }}"><i class="fa fa-times" aria-hidden="true"></i></a>
                         </p>
                     </td>
                 </tr>
             {% endfor %}
         </tbody>
     </table>
+
+
 {% endblock %}
 
 

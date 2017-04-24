@@ -26,7 +26,6 @@
                             </div>
                         {% endfor %}
                     {% endfor %}
-
                     {% block body %}{% endblock %}
                 </div>
             </div>
@@ -34,9 +33,17 @@
     </div>
     {{ include("AppBundle:Admin:footer.html.twig") }}
 
-{% block javascript %}{% endblock %}
+
 <script src="https://code.jquery.com/jquery.min.js"></script>
 <script src="{{ asset('js/bootstrap.min.js') }}"></script>
 <script src="{{ asset('js/button_retour.js') }}"></script>
+    {% block javascript %}
+        <script>
+            $(document).ready(function(){
+                $('[data-toggle="tooltip"]').tooltip();
+            });
+        </script>
+    {% endblock %}
+
 </body>
 </html>

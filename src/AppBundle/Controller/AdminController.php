@@ -15,7 +15,7 @@ class AdminController extends Controller
     /**
      * @Route("/admin", name="admin")
      * @return \Symfony\Component\HttpFoundation\Response
-     * @Security("has_role('ROLE_ADMIN')")
+     * @Security("has_role('ROLE_USERNAT')")
      */
     public function indexAction()
     {
@@ -26,7 +26,7 @@ class AdminController extends Controller
      * @Route("/admin/configuration", name="admin_configuration")
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
-     * @Security("has_role('ROLE_ADMIN')")
+     * @Security("has_role('ROLE_SUPER_ADMIN')")
      */
     public function configurationAction(Request $request)
     {

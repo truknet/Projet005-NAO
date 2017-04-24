@@ -7,9 +7,23 @@
             <li><a href="{{ path('homepage') }}"><i class="fa fa-home"></i> Retour au site <span class="sr-only">(current)</span></a></li>
             <li><hr></li>
             <li><a href="{{ path('admin') }}">Tableau de bord</a></li>
-            <li><a href="{{ path('admin_users') }}">Utilisateurs</a></li>
-            <li><a href="{{ path('admin_configuration') }}">Configuration</a></li>
+
+            {% if is_granted("ROLE_SUPER_ADMIN") %}
+                <li><a href="{{ path('admin_users') }}">Utilisateurs</a></li>
+                <li><a href="{{ path('admin_configuration') }}">Configuration</a></li>
+            {% endif %}
+
+            {% if is_granted("ROLE_MODERATEUR") %}
+                <li><a href="#">Newsletter</a></li>
+            {% endif %}
+
+
+            {% if is_granted("ROLE_USERNAT") %}
+                <li><a href="#">Observations en attentes</a></li>
+            {% endif %}
+
             <li><hr></li>
+
             <li>
                 {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
                     <a href="{{ path('fos_user_security_logout') }}">

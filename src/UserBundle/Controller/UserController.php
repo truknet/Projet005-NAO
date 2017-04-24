@@ -8,13 +8,15 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use UserBundle\Entity\User as User;
+use UserBundle\Form\AdminEditProfileType;
+use UserBundle\Form\UserType;
 
 class UserController extends Controller {
 
     /**
      * @Route("/admin/users", name="admin_users")
      * @return \Symfony\Component\HttpFoundation\Response
-     * @Security("has_role('ROLE_ADMIN')")
+     * @Security("has_role('ROLE_SUPER_ADMIN')")
      */
     public function usersAction()
     {
@@ -30,7 +32,7 @@ class UserController extends Controller {
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      * @param $user
      * @param Request $request
-     * @Security("has_role('ROLE_ADMIN')")
+     * @Security("has_role('ROLE_SUPER_ADMIN')")
      */
     public function deleteUserAction(User $user, Request $request)
     {
@@ -53,10 +55,10 @@ class UserController extends Controller {
 
     /**
      * @Route("/admin/activateuser/{username}", name="admin_activate_user")
+     * @Security("has_role('ROLE_SUPER_ADMIN')")
+     * @param $username
      * @param Request $request
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
-     * @throws HttpException
-     * @Security("has_role('ROLE_ADMIN')")
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function activateUserAction($username, Request $request)
     {
@@ -68,44 +70,37 @@ class UserController extends Controller {
             $user = $this->get('fos_user.util.user_manipulator')->activate($username);
         }
         $users = $userManager->findUsers();
-        return $this->render('UserBundle:User:users.html.twig', array(
+        return $this->redirectToRoute('admin_users', array(
             'users' => $users,
         ));
     }
 
     /**
      * @Route("/admin/edituser/{id}", name="admin_edit_user")
-     * @Security("has_role('ROLE_ADMIN')")
-     * @param $id
+     * @Security("has_role('ROLE_SUPER_ADMIN')")
+     * @param $user
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
      * @throws AccessDeniedException
      */
-    public function editUserAction($id, Request $request)
-    {
-        $userManager = $this->container->get('fos_user.user_manager');
-        $user = $userManager->findUserBy(array('id'=>$id));
-        if (!is_object($user)) {
-            throw new AccessDeniedException('This user does not have access to this section.');
-        }
-        $formFactory = $this->get('fos_user.profile.form.factory');
-        $form = $formFactory->createForm();
-        $form->setData($user);
-        $form->handleRequest($request);
-        if ($form->isValid()) {
-            /** @var $userManager \FOS\UserBundle\Model\UserManagerInterface */
-            $userManager = $this->get('fos_user.user_manager');
-            $userManager->updateUser($user);
-
-            $session = $this->getRequest()->getSession();
-            $session->getFlashBag()->add('message', 'Successfully updated');
-            $users = $userManager->findUsers();
-            return $this->render('UserBundle:User:users.html.twig', array(
-                'users' => $users,
+    public function editUserAction(User $user, Request $request)
+        {
+            $userManager = $this->container->get('fos_user.user_manager');
+            $user = $userManager->findUserBy(array('id'=>$user->getId()));
+            if (!is_object($user)) {
+                throw new AccessDeniedException('This user does not have access to this section.');
+            }
+            $em = $this->getDoctrine()->getManager();
+            $form = $this->get('form.factory')->create(UserType::class, $user);
+            $form->handleRequest($request);
+            if ($form->isSubmitted() && $form->isValid()) {
+                $user->setRoles($user->getGroups()[0]->getRoles());
+                $userManager->updateUser($user);
+                $request->getSession()->getFlashBag()->add('success', 'Utilisateur a bien été modifié.');
+                return $this->redirectToRoute('admin_users');
+            }
+            return $this->render('UserBundle:Admin:edit_user.html.twig', array(
+                'form' => $form->createView()
             ));
         }
-        return $this->render('FOSUserBundle:Profile:edit.html.twig', array(
-            'form' => $form->createView()
-        ));
-    }
 }

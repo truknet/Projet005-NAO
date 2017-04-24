@@ -6,6 +6,7 @@ use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use FOS\UserBundle\Model\GroupableInterface;
 
 class LoadUserData extends AbstractFixture implements OrderedFixtureInterface, ContainerAwareInterface
 {
@@ -37,7 +38,15 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface, C
         $user->setName('Pierre Admino');
         $user->setPlainPassword('admin');
         $user->setEnabled(true);
-        $user->addRole('ROLE_ADMIN');
+        $user->addRole('ROLE_SUPER_ADMIN');
+        $userManager->updateUser($user);
+
+        $user = $userManager->createUser();
+        $user->setEmail('test3@example.com');
+        $user->setUsername('Modo');
+        $user->setName('Manon Koude');
+        $user->setPlainPassword('manon');
+        $user->setEnabled(true);
         $userManager->updateUser($user);
 
         $user = $userManager->createUser();
@@ -46,7 +55,6 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface, C
         $user->setName('Jean Voye');
         $user->setPlainPassword('jeannot');
         $user->setEnabled(true);
-        $user->addRole('ROLE_USER');
         $userManager->updateUser($user);
 
         $user = $userManager->createUser();
@@ -55,7 +63,6 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface, C
         $user->setName('Nathalie Sync');
         $user->setPlainPassword('nathalie');
         $user->setEnabled(true);
-        $user->addRole('ROLE_USERNAT');
         $userManager->updateUser($user);
     }
 
@@ -67,7 +74,7 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface, C
      */
     public function getOrder()
     {
-        return 2;
+        return 3;
     }
 
 }

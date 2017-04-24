@@ -1,12 +1,14 @@
 {% trans_default_domain 'FOSUserBundle' %}
 
 {% if error %}
-    <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+    <div class="container">
+        <div class="alert alert-warning" role="alert">
+            <p>{{ error.messageKey|trans(error.messageData, 'security') }}</p>
+        </div>
+    </div>
 {% endif %}
 
-<div class="row">
 
-    <div class="col-sm-offset-4 col-sm-4">
     <form class="form-signin" action="{{ path("fos_user_security_check") }}" method="post">
 
         <h2 class="form-signin-heading">Identification</h2>
@@ -27,6 +29,5 @@
         </div>
 
         <input class="btn btn-sm btn-primary" type="submit" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans }}" />
+        <a class="btn btn-primary btn-sm" href="{{ path('fos_user_registration_register') }}">Vous n'êtes pas encore inscrit ?</a>
     </form>
-    </div>
-</div>
