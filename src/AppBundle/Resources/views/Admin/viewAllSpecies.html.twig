@@ -1,0 +1,57 @@
+{% extends "AppBundle::layoutAdmin.html.twig" %}
+{% block title %}Affiche toutes les espèces{% endblock %}
+{% block body %}
+    <h1>Affichage de toutes les espèces.</h1>
+    <br>
+    <div class="center">
+        <p>Total d'espèces : {{ pagination.getTotalItemCount }}</p>
+        <form class="form-inline">
+            <div class="form-group">
+                <div class="input-group">
+                    <input type="text" class="form-control" id="exampleInputAmount" placeholder="Recherche">
+                    <div class="input-group-addon"><i class="glyphicon glyphicon-search"></i></div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <br>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>{{ knp_pagination_sortable(pagination, 'Famille' , 'taxrefv10.Famille') }}</th>
+            <th>{{ knp_pagination_sortable(pagination, 'Nom scientifique', 'taxrefv10.LbNom') }}</th>
+            <th>{{ knp_pagination_sortable(pagination, 'Nom auteur', 'taxrefv10.LbAuteur') }}</th>
+            <th>{{ knp_pagination_sortable(pagination, 'Nom Vern. Fr', 'taxrefv10.NomVern') }}</th>
+            <th>{{ knp_pagination_sortable(pagination, 'Nom Vern. En', 'taxrefv10.NomVernEng') }}</th>
+            <th>Obs.</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for oiseau in pagination %}
+            <tr {% if loop.index is odd %}class="color"{% endif %}>
+                <td>{{ oiseau.Famille }}</td>
+                <td>{{ oiseau.LbNom }}</td>
+                <td>{{ oiseau.LbAuteur }}</td>
+                <td>{{ oiseau.NomVern }}</td>
+                <td>{{ oiseau.NomVernEng }}</td>
+                <td>{{ oiseau.observations.count }}</td>
+                <td>
+                    <p>
+                        <a class="btn btn-primary btn-xs" href="{{ path('admin_view_one_species', {'id': oiseau.id}) }}">Voir</a>
+                        <a class="btn btn-primary btn-xs" href="{{ path('admin_del_species', {'id': oiseau.id}) }}">Supprimer</a>
+                        <a class="btn btn-primary btn-xs" href="{{ path('admin_edit_species', {'id': oiseau.id}) }}">Editer</a>
+                    </p>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <div class="navigation">
+        {{ knp_pagination_render(pagination) }}
+    </div>
+{% endblock %}
+
+
+

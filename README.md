@@ -3,6 +3,7 @@ OpenClassRoom - Projet 5 - NAO
 
 Projet de création de site
 
+05/05/2017 : Modifs Entity/DataFixtures/Administration<br>
 24/04/2017 : Modifs mineures suite réunion / Amélioration gestion utilisateur / Ajout Fixtures<br>
 21/04/2017 : Réglage BackTop / Intégration Font Awesome / Ajout icone en tête de colonne Sortable<br>
 20/04/2017 : Modif page d'accueil + mise en place page "En savoir plus"<br>

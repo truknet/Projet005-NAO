@@ -1,0 +1,24 @@
+{% extends "AppBundle::layoutAdmin.html.twig" %}
+
+{% block title %}Fiche Observation{% endblock %}
+
+{% block stylesheets %}{% endblock %}
+
+{% block body %}
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">Observation #{{ observation.id }}</h3>
+        </div>
+        <div class="panel-body">
+            <table style="width: 100%">
+
+                <tr><td>Titre</td><td>{{ observation.name }}</td></tr>
+                <tr><td>Date de l'observation</td><td>{{ observation.dateObservation|date("d/m/Y") }}</td></tr>
+                <tr><td>Nom espèce</td><td>{{ observation.espece.lbNom }}</td></tr>
+                <tr><td>Status</td><td>{{ observation.status }}</td></tr>
+                <tr><td>Description</td><td>{{ observation.description }}</td></tr>
+            </table>
+        </div>
+    </div>
+{% endblock %}
+

@@ -10,19 +10,19 @@
     <table class="table table-striped">
         <thead>
         <tr>
-            <th>{{ knp_pagination_sortable(pagination, 'Nom' , 'taxrefv10.LbNom') }}</th>
-            <th>{{ knp_pagination_sortable(pagination, 'Famille', 'taxrefv10.Famille') }}</th>
-            <th>{{ knp_pagination_sortable(pagination, 'Nom complet', 'taxrefv10.NomComplet') }}</th>
-            <th>{{ knp_pagination_sortable(pagination, 'Nom Vern', 'taxrefv10.NomVern')|raw }}</th>
+            <th>{{ knp_pagination_sortable(pagination, 'Famille' , 'taxrefv10.Famille') }}</th>
+            <th>{{ knp_pagination_sortable(pagination, 'Nom scientifique', 'taxrefv10.LbNom') }}</th>
+            <th>{{ knp_pagination_sortable(pagination, 'Nom auteur', 'taxrefv10.LbAuteur') }}</th>
+            <th>{{ knp_pagination_sortable(pagination, 'Nom Vern. Fr', 'taxrefv10.NomVern') }}</th>
             <th></th>
         </tr>
         </thead>
         <tbody>
         {% for oiseau in pagination %}
             <tr {% if loop.index is odd %}class="color"{% endif %}>
-                <td>{{ oiseau.LbNom }}</td>
                 <td>{{ oiseau.Famille }}</td>
-                <td>{{ oiseau.NomComplet }}</td>
+                <td>{{ oiseau.LbNom }}</td>
+                <td>{{ oiseau.LbAuteur }}</td>
                 <td>{{ oiseau.NomVern }}</td>
                 <td>
                     <p>

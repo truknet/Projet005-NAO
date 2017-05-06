@@ -2,7 +2,9 @@
 
 namespace AppBundle\Entity;
 
+
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Observation
@@ -12,6 +14,36 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Observation
 {
+
+    /**
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Image", mappedBy="observation")
+     */
+    private $images;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User", inversedBy="approuvedBys")
+     */
+    private $approuvedBy;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Taxrefv10", inversedBy="observations")
+     */
+    private $espece;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User", inversedBy="observations")
+     */
+    private $author;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->images = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->dateRecord = new \DateTime();
+    }
+
     /**
      * @var int
      *
@@ -38,28 +70,28 @@ class Observation
     /**
      * @var string
      *
-     * @ORM\Column(name="name", type="string", length=255)
+     * @ORM\Column(name="title", type="string", length=255)
      */
-    private $name;
+    private $title;
 
     /**
-     * @var string
+     * @var float
      *
-     * @ORM\Column(name="gpsLatitude", type="decimal", precision=10, scale=10)
+     * @ORM\Column(name="gpsLatitude", type="float")
      */
     private $gpsLatitude;
 
     /**
-     * @var string
+     * @var float
      *
-     * @ORM\Column(name="gpsLongitude", type="decimal", precision=10, scale=10)
+     * @ORM\Column(name="gpsLongitude", type="float")
      */
     private $gpsLongitude;
 
     /**
-     * @var bool
+     * @var string
      *
-     * @ORM\Column(name="status", type="boolean")
+     * @ORM\Column(name="status", type="string", length=255)
      */
     private $status;
 
@@ -69,27 +101,6 @@ class Observation
      * @ORM\Column(name="description", type="text")
      */
     private $description;
-
-    /**
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Image", mappedBy="observation")
-     */
-    private $images;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User", inversedBy="approuvedBys")
-     */
-    private $approuvedBy;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Taxrefv10", inversedBy="observations")
-     */
-    private $espece;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User", inversedBy="observations")
-     */
-    private $author;
-
 
     /**
      * Get id
@@ -150,27 +161,27 @@ class Observation
     }
 
     /**
-     * Set name
+     * Set title
      *
-     * @param string $name
+     * @param string $title
      *
      * @return Observation
      */
-    public function setName($name)
+    public function setTitle($title)
     {
-        $this->name = $name;
+        $this->title = $title;
 
         return $this;
     }
 
     /**
-     * Get name
+     * Get title
      *
      * @return string
      */
-    public function getName()
+    public function getTitle()
     {
-        return $this->name;
+        return $this->title;
     }
 
     /**
@@ -364,13 +375,7 @@ class Observation
     {
         return $this->author;
     }
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->images = new \Doctrine\Common\Collections\ArrayCollection();
-    }
+
 
     /**
      * Add image

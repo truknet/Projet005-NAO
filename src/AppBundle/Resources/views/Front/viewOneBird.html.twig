@@ -16,22 +16,12 @@
                 </div>
                 <div class="panel-body">
                     <table style="width: 100%">
-                        <tr><td>Nom</td><td>{{ taxrefv10.nomCompletHtml|raw }}</td></tr>
-                        <tr><td>Regne</td><td>{{ taxrefv10.regne }}</td></tr>
-                        <tr><td>Phylum</td><td>{{ taxrefv10.phylum }}</td></tr>
-                        <tr><td>Classe</td><td>{{ taxrefv10.classe }}</td></tr>
                         <tr><td>Famille</td><td>{{ taxrefv10.famille }}</td></tr>
-                        <tr><td>Identifiant unique du nom scientifique</td><td>{{ taxrefv10.cdNom }}</td></tr>
-                        <tr><td>Rang taxonomique (clé vers TAXREF_RANG)</td><td>{{ taxrefv10.rang }}</td></tr>
-                        <tr><td>Nom scientifique du taxon (sans l’autorité)</td><td>{{ taxrefv10.lbNom }}</td></tr>
-                        <tr><td>Autorité du taxon (Auteur, année, gestion des parenthèses)</td><td>{{ taxrefv10.lbAuteur }}</td></tr>
-                        <tr><td>Combinaison des champs pour donner le nom complet (~LB_NOM+" " +LB_AUTEUR)</td><td>{{ taxrefv10.nomComplet }}</td></tr>
-                        <tr><td>Nom Complet HTML</td><td>{{ taxrefv10.nomCompletHtml|raw }}</td></tr>
-                        <tr><td>Type de validité du nom scientifique complet (clé vers TAXREF_VALIDITE)</td><td>{{ taxrefv10.nomValide }}</td></tr>
-                        <tr><td>Nom Français</td><td>{{ taxrefv10.nomVern }}</td></tr>
-                        <tr><td>Nom Anglais</td><td>{{ taxrefv10.nomVernEng }}</td></tr>
-                        <tr><td>Code de l'habitat (clé vers TAXREF_HABITATS)</td><td>{{ taxrefv10.habitat }}</td></tr>
-                        <tr><td>URL INPN</td><td><a href="{{ taxrefv10.url }}" target="_blank">Lien pour accéder à la fiche sur le site INPN</a></td></tr>
+                        <tr><td>Nom scientifique</td><td>{{ taxrefv10.LbNom }}</td></tr>
+                        <tr><td>Autorité (Auteur, année)</td><td>{{ taxrefv10.LbAuteur }}</td></tr>
+                        <tr><td>Nom Français</td><td>{{ taxrefv10.NomVern }}</td></tr>
+                        <tr><td>Nom Anglais</td><td>{{ taxrefv10.NomVernEng }}</td></tr>
+                        <tr><td>URL INPN</td><td><a href="{{ taxrefv10.Url }}" target="_blank">Lien pour accéder à la fiche sur le site INPN</a></td></tr>
                     </table>
                 </div>
             </div>

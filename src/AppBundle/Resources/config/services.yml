@@ -4,6 +4,11 @@ services:
         arguments:
             - "@doctrine.orm.entity_manager"
 
+    services.loaddashboard:
+        class: AppBundle\Services\LoadDashboard
+        arguments:
+            - "@doctrine.orm.entity_manager"
+
     app.sendEmail:
         class: AppBundle\Services\SendEmail
         arguments:

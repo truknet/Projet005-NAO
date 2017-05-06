@@ -90,11 +90,9 @@ class UserController extends Controller {
             if (!is_object($user)) {
                 throw new AccessDeniedException('This user does not have access to this section.');
             }
-            $em = $this->getDoctrine()->getManager();
             $form = $this->get('form.factory')->create(UserType::class, $user);
             $form->handleRequest($request);
             if ($form->isSubmitted() && $form->isValid()) {
-                $user->setRoles($user->getGroups()[0]->getRoles());
                 $userManager->updateUser($user);
                 $request->getSession()->getFlashBag()->add('success', 'Utilisateur a bien été modifié.');
                 return $this->redirectToRoute('admin_users');

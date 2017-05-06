@@ -10,9 +10,7 @@ namespace AppBundle\Repository;
  */
 class Taxrefv10Repository extends \Doctrine\ORM\EntityRepository
 {
-    /**
-     * @return \Doctrine\ORM\Query
-     */
+
     public function getAll()
     {
         $qb = $this->createQueryBuilder('taxrefv10')->getQuery();

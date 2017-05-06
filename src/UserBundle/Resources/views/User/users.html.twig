@@ -3,8 +3,6 @@
 {% block body %}
     <h1>Gestion utilisateurs</h1>
     <br />
-    {{ dump(users) }}
-
     <table class="table table-striped">
         <thead>
         <tr>
@@ -15,7 +13,6 @@
             <th>Dernière connexion</th>
             <th>Actif</th>
             <th>Role</th>
-            <th>Groupe</th>
             <th></th>
         </tr>
         </thead>
@@ -35,10 +32,9 @@
                         {% endif %}
                     </td>
                     <td>
-                        {% if  user.roles[0] == 'ROLE_SUPER_ADMIN' %}Super Admin{% endif %}
-                        {% if  user.roles[0] == 'ROLE_MODERATEUR' %}Modérateur{% endif %}
-                        {% if  user.roles[0] == 'ROLE_USERNAT' %}Naturaliste{% endif %}
-                        {% if  user.roles[0] == 'ROLE_USER' %}Particulier{% endif %}
+                        {% for role in user.roles %}
+                            {{ role }},
+                        {% endfor %}
                     </td>
                     <td></td>
                     <td>

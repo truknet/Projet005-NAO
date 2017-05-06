@@ -32,7 +32,7 @@ class LoadConfig
     {
         if (!$this->config)
         {
-            $this->config = $this->em->getRepository('AppBundle:Configuration')->findOneByName('config1');;
+            $this->config = $this->em->getRepository('AppBundle:Configuration')->findOneByName('config1');
         }
         return $this->config;
     }

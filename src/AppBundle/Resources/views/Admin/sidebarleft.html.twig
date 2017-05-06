@@ -1,9 +1,4 @@
-<div class="panel panel-default">
-    <div class="panel-heading">
-        Menu
-    </div>
-    <div class="panel-body">
-        <ul class="nav nav-pills nav-stacked">
+        <ul class="nav nav-sidebar">
             <li><a href="{{ path('homepage') }}"><i class="fa fa-home"></i> Retour au site <span class="sr-only">(current)</span></a></li>
             <li><hr></li>
             <li><a href="{{ path('admin') }}">Tableau de bord</a></li>
@@ -11,6 +6,12 @@
             {% if is_granted("ROLE_SUPER_ADMIN") %}
                 <li><a href="{{ path('admin_users') }}">Utilisateurs</a></li>
                 <li><a href="{{ path('admin_configuration') }}">Configuration</a></li>
+                <li><a href="{{ path('admin_view_all_species', {'page': 1}) }}">Les espèces</a></li>
+
+            {% endif %}
+
+            {% if is_granted("ROLE_USERNAT") %}
+                <li><a href="{{ path('admin_view_all_observations', {'page': 1}) }}">Observations</a></li>
             {% endif %}
 
             {% if is_granted("ROLE_MODERATEUR") %}
@@ -18,9 +19,7 @@
             {% endif %}
 
 
-            {% if is_granted("ROLE_USERNAT") %}
-                <li><a href="#">Observations en attentes</a></li>
-            {% endif %}
+
 
             <li><hr></li>
 
@@ -34,5 +33,3 @@
                 {% endif %}
             </li>
         </ul>
-    </div>
-</div>

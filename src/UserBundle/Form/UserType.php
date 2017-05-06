@@ -5,11 +5,6 @@ namespace UserBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
-use UserBundle\Entity\Group;
-use Symfony\Component\Form\Extension\Core\Type\CollectionType;
-use UserBundle\Form\GroupType;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 class UserType extends AbstractType
@@ -22,10 +17,19 @@ class UserType extends AbstractType
             ->add('username', null, array('label' => "Nom d'utilisateur"))
             ->add('email', null, array('required' => false, 'label' => 'E-mail'))
             ->add('enabled', null, array('label' => 'Actif/Inactif'))
-            ->add('groups', EntityType::class, array(
-                'class'        => 'UserBundle:Group',
-                'choice_label' => 'name',
-                'multiple'     => true,
+            ->add('roles', ChoiceType::class, array(
+                'attr'  =>  array('class' => 'form-control',
+                    'style' => 'margin:5px 0;'),
+                'choices' =>
+                    array
+                    (
+                        'Administrateur' => 'ROLE_SUPER_ADMIN',
+                        'Moderateur' => 'ROLE_MODERATEUR',
+                        'Naturaliste' => 'ROLE_USERNAT',
+                        'Particulier' => 'ROLE_USER',
+                    ) ,
+                'multiple' => true,
+                'required' => true,
             ))
         ;
     }
