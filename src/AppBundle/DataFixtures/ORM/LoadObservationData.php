@@ -14,7 +14,7 @@ class LoadObservationData extends AbstractFixture implements OrderedFixtureInter
 
         $observation = new Observation();
         $observation->setDateObservation(new \DateTime());
-        $observation->setName("Observation d'un Chevalier stagnatile");
+        $observation->setTitle("Observation d'un Chevalier stagnatile");
         $observation->setGpsLatitude(48.242931);
         $observation->setGpsLongitude(-4.425243);
         $observation->setDescription("Description");
@@ -36,7 +36,7 @@ class LoadObservationData extends AbstractFixture implements OrderedFixtureInter
 
         $observation = new Observation();
         $observation->setDateObservation(new \DateTime());
-        $observation->setName("Observation d'un Pipit de Richard");
+        $observation->setTitle("Observation d'un Pipit de Richard");
         $observation->setGpsLatitude(48.041610);
         $observation->setGpsLongitude(-4.867217);
         $observation->setDescription("Description");
@@ -58,7 +58,7 @@ class LoadObservationData extends AbstractFixture implements OrderedFixtureInter
 
         $observation = new Observation();
         $observation->setDateObservation(new \DateTime());
-        $observation->setName("Observation d'un Pipit de Richard");
+        $observation->setTitle("Observation d'un Pipit de Richard");
         $observation->setGpsLatitude(48.035984);
         $observation->setGpsLongitude(-4.852684);
         $observation->setDescription("Description");
@@ -80,7 +80,7 @@ class LoadObservationData extends AbstractFixture implements OrderedFixtureInter
 
         $observation = new Observation();
         $observation->setDateObservation(new \DateTime());
-        $observation->setName("Observation d'un Goéland à ailes blanches");
+        $observation->setTitle("Observation d'un Goéland à ailes blanches");
         $observation->setGpsLatitude(48.460323);
         $observation->setGpsLongitude(-5.103005);
         $observation->setDescription("Description");
@@ -102,7 +102,7 @@ class LoadObservationData extends AbstractFixture implements OrderedFixtureInter
 
         $observation = new Observation();
         $observation->setDateObservation(new \DateTime());
-        $observation->setName("Observation d'un Rougequeue noir");
+        $observation->setTitle("Observation d'un Rougequeue noir");
         $observation->setGpsLatitude(48.067142);
         $observation->setGpsLongitude(-4.426957);
         $observation->setDescription("Description");
