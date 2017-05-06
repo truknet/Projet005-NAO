@@ -3,6 +3,7 @@ OpenClassRoom - Projet 5 - NAO
 
 Projet de création de site
 
+05/05/2017 : DataFixtures 100% auto<br>
 05/05/2017 : Modifs Entity/DataFixtures/Administration<br>
 24/04/2017 : Modifs mineures suite réunion / Amélioration gestion utilisateur / Ajout Fixtures<br>
 21/04/2017 : Réglage BackTop / Intégration Font Awesome / Ajout icone en tête de colonne Sortable<br>
@@ -22,4 +23,3 @@ php bin/console doctrine:database:create<br>
 php bin/console doctrine:schema:update --force<br>
 php bin/console doctrine:fixtures:load<br>
 
-Import manuel de la base : taxrefv10.sql
