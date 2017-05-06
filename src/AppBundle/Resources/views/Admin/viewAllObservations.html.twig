@@ -20,7 +20,7 @@
     <table class="table table-striped">
         <thead>
         <tr>
-            <th>{{ knp_pagination_sortable(pagination, 'Titre' , 'observation.name') }}</th>
+            <th>{{ knp_pagination_sortable(pagination, 'Titre' , 'observation.title') }}</th>
             <th>{{ knp_pagination_sortable(pagination, 'Date', 'observation.dateObservation') }}</th>
             <th>{{ knp_pagination_sortable(pagination, 'Espece', 'observation.espece.lbNom') }}</th>
             <th>{{ knp_pagination_sortable(pagination, 'Status', 'observation.status') }}</th>
@@ -30,7 +30,7 @@
         <tbody>
         {% for observation in pagination %}
             <tr {% if loop.index is odd %}class="color"{% endif %}>
-                <td>{{ observation.name }}</td>
+                <td>{{ observation.title }}</td>
                 <td>{{ observation.dateObservation|date("d/m/Y") }}</td>
                 <td>{{ observation.espece.lbNom }}</td>
                 <td>{{ observation.status }}</td>

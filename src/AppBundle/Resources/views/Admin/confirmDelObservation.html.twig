@@ -5,7 +5,7 @@
 {% block body %}
 <h2>Supprimer une observation</h2>
 <p>
-    Etes-vous certain de vouloir supprimer l'observation "#{{ observation.id }} - {{ observation.name }}" ?
+    Etes-vous certain de vouloir supprimer l'observation "#{{ observation.id }} - {{ observation.title }}" ?
 </p>
 {{ form_start(form) }}
 <a href="{{ path('admin') }}" class="btn btn-default">Retour au tableau de bord</a>
