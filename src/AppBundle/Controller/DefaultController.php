@@ -5,6 +5,8 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Contact;
 use AppBundle\Entity\Taxrefv10;
+use AppBundle\Entity\Observation;
+use AppBundle\Form\ObservationFrontType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -18,15 +20,20 @@ class DefaultController extends Controller
      */
     public function indexAction()
     {
-        return $this->render('AppBundle:Front:index.html.twig');
+        $em = $this->getDoctrine()->getManager();
+        $listLastObservations = $em->getRepository('AppBundle:Observation')->findLastObservations(3);
+
+        return $this->render('AppBundle:Front:index.html.twig', array(
+            'listLastObservations' => $listLastObservations
+        ));
     }
 
     /**
-     * @Route("/viewall/{page}", name="view_all")
+     * @Route("/viewallspecies/{page}", name="view_all_species")
      * @param $page
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function viewAllAction($page)
+    public function viewAllSpeciesAction($page)
     {
         $em = $this->getDoctrine()->getManager();
         $paginator  = $this->get('knp_paginator');
@@ -35,22 +42,84 @@ class DefaultController extends Controller
             $page/*page number*/,
             25/*limit per page*/
         );
-        return $this->render('AppBundle:Front:viewAll.html.twig', array(
+        return $this->render('AppBundle:Front:viewAllSpecies.html.twig', array(
             'pagination' => $pagination,
         ));
     }
 
     /**
-     * @Route("/viewonebird/{id}", name="view_one_bird")
+     * @Route("/viewallobservations/{page}", name="view_all_observations")
+     * @param $page
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function viewAllObservationsAction($page)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $paginator  = $this->get('knp_paginator');
+        $pagination = $paginator->paginate(
+            $em->getRepository('AppBundle:Observation')->getAllValid(), /* query NOT result */
+            $page/*page number*/,
+            25/*limit per page*/
+        );
+        return $this->render('AppBundle:Front:viewAllObservations.html.twig', array(
+            'pagination' => $pagination,
+        ));
+    }
+
+    /**
+     * @Route("/viewonespecies/{id}", name="view_one_species")
      * @param $taxrefv10
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function viewOneBirdAction(Taxrefv10 $taxrefv10)
+    public function viewOneSpeciesAction(Taxrefv10 $taxrefv10)
     {
-        return $this->render('AppBundle:Front:viewOneBird.html.twig', array(
+        $em = $this->getDoctrine()->getManager();
+        $listObservations = $em->getRepository('AppBundle:Observation')->findBy(array('espece' => $taxrefv10));
+        return $this->render('AppBundle:Front:viewOneSpecies.html.twig', array(
             'taxrefv10' => $taxrefv10,
+            'listObservations' => $listObservations,
         ));
     }
+
+    /**
+     * @Route("/viewoneobservation/{id}", name="view_one_observation")
+     * @param $observation
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function viewOneObservationAction(Observation $observation)
+    {
+        return $this->render('AppBundle:Front:viewOneObservation.html.twig', array(
+            'observation' => $observation,
+        ));
+    }
+
+    /**
+     * @Route("/createobservation", name="create_observation")
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     */
+    public function createObservationAction(Request $request)
+    {
+        $observation = new Observation();
+        $form   = $this->get('form.factory')->create(ObservationFrontType::class, $observation);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($observation);
+            $em->flush();
+            $request->getSession()->getFlashBag()->add('success', 'Observation bien enregistrée.');
+
+            return $this->redirectToRoute('view_one_observation', array('id' => $observation->getId()));
+        }
+        return $this->render('AppBundle:Front:createObservation.html.twig', array(
+            'form' => $form->createView(),
+            'observation' => $observation,
+        ));
+
+    }
+
+
+
 
     /**
      * @Route("/learnmore", name="learn_more")
@@ -115,7 +184,11 @@ class DefaultController extends Controller
      */
     public function sideBarLastAction()
     {
-        return $this->render('AppBundle:Front:sideBarLast.html.twig');
+        $em = $this->getDoctrine()->getManager();
+        $listLastObservations = $em->getRepository('AppBundle:Observation')->findLastObservations(10);
+        return $this->render('AppBundle:Front:sideBarLast.html.twig', array(
+            'listLastObservations' => $listLastObservations
+        ));
     }
 
     /**

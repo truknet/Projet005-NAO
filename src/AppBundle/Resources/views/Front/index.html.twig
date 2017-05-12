@@ -13,51 +13,25 @@
         <div class="well">
             <h3>Les dernières observations</h3>
             <div class="row">
+
+            {% for listLastObservation in listLastObservations %}
                 <div class="col-sm-4">
                     <div class="panel panel-primary">
                         <div class="panel-heading">
-                            <h3 class="panel-title">Obs 1</h3>
+                            <h6 class="panel-title">{{ listLastObservation.title | truncate(40, false, '...') }}</h6>
                         </div>
                         <div class="panel-body">
-                            <ul>
-                                <li>Nom  : .....</li>
-                                <li>Date : .....</li>
-                                <li>Coordonnées GPS : ..........</li>
-                            </ul>
-                            <a href="#"><i class="fa fa-list" aria-hidden="true"></i>&nbsp;&nbsp;Voir la fiche</a>
+                            <table>
+                                <tr><td>Nom scien. : </td><td>&nbsp;{{ listLastObservation.espece.lbNom }}</td></tr>
+                                <tr><td>Date : </td><td>&nbsp;{{ listLastObservation.dateObservation|date("d/m/Y") }}</td></tr>
+                                <tr><td>Coordonnées GPS : </td><td>&nbsp;{{ listLastObservation.gpsLatitude }}/{{ listLastObservation.gpsLongitude }}</td></tr>
+                                <tr><td><a href="{{ path('view_one_observation', {'id': listLastObservation.id}) }}"><i class="fa fa-list" aria-hidden="true"></i>&nbsp;&nbsp;Voir la fiche</a></td><td></td></tr>
+                            </table>
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-4">
-                    <div class="panel panel-primary">
-                        <div class="panel-heading">
-                            <h3 class="panel-title">Obs 2</h3>
-                        </div>
-                        <div class="panel-body">
-                            <ul>
-                                <li>Nom  : .....</li>
-                                <li>Date : .....</li>
-                                <li>Coordonnées GPS : ..........</li>
-                            </ul>
-                            <a href="#"><i class="fa fa-list" aria-hidden="true"></i>&nbsp;&nbsp;Voir la fiche</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-4">
-                    <div class="panel panel-primary">
-                        <div class="panel-heading">
-                            <h3 class="panel-title">Obs 3</h3>
-                        </div>
-                        <div class="panel-body">
-                            <ul>
-                                <li>Nom  : .....</li>
-                                <li>Date : .....</li>
-                                <li>Coordonnées GPS : ..........</li>
-                            </ul>
-                            <a href="#"><i class="fa fa-list" aria-hidden="true"></i>&nbsp;&nbsp;Voir la fiche</a>
-                        </div>
-                    </div>
-                </div>
+            {% endfor %}
+
             </div>
         </div>
     </div>

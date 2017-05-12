@@ -13,7 +13,7 @@
 <body>
 {% block navbar %}{{ include("AppBundle:Front:navbar.html.twig") }}{% endblock %}
 <div class="container">
-{{ include("AppBundle:Front:carrousel.html.twig") }}
+    {{ include("AppBundle:Front:carrousel.html.twig") }}
     </div>
     <div class="container">
         <div class="row">
@@ -45,9 +45,10 @@
     </div>
     {{ render(controller('AppBundle:Default:modalContact')) }}
     {{ include("AppBundle:Front:footer.html.twig") }}
-    {% block javascript %}{% endblock %}
+
     <script src="https://code.jquery.com/jquery.min.js"></script>
     <script src="{{ asset('js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('js/button_retour.js') }}"></script>
+    {% block javascript %}{% endblock %}
 </body>
 </html>

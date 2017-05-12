@@ -29,19 +29,19 @@
         </tr>
         </thead>
         <tbody>
-        {% for oiseau in pagination %}
+        {% for espece in pagination %}
             <tr {% if loop.index is odd %}class="color"{% endif %}>
-                <td>{{ oiseau.Famille }}</td>
-                <td>{{ oiseau.LbNom }}</td>
-                <td>{{ oiseau.LbAuteur }}</td>
-                <td>{{ oiseau.NomVern }}</td>
-                <td>{{ oiseau.NomVernEng }}</td>
-                <td>{{ oiseau.observations.count }}</td>
+                <td>{{ espece.Famille }}</td>
+                <td>{{ espece.LbNom }}</td>
+                <td>{{ espece.LbAuteur }}</td>
+                <td>{{ espece.NomVern }}</td>
+                <td>{{ espece.NomVernEng }}</td>
+                <td>####</td>
                 <td>
                     <p>
-                        <a class="btn btn-primary btn-xs" href="{{ path('admin_view_one_species', {'id': oiseau.id}) }}">Voir</a>
-                        <a class="btn btn-primary btn-xs" href="{{ path('admin_del_species', {'id': oiseau.id}) }}">Supprimer</a>
-                        <a class="btn btn-primary btn-xs" href="{{ path('admin_edit_species', {'id': oiseau.id}) }}">Editer</a>
+                        <a class="btn btn-primary btn-xs" href="{{ path('admin_view_one_species', {'id': espece.id}) }}">Voir</a>
+                        <a class="btn btn-primary btn-xs" href="{{ path('admin_del_species', {'id': espece.id}) }}">Supprimer</a>
+                        <a class="btn btn-primary btn-xs" href="{{ path('admin_edit_species', {'id': espece.id}) }}">Editer</a>
                     </p>
                 </td>
             </tr>

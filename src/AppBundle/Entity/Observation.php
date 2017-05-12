@@ -6,6 +6,7 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
+
 /**
  * Observation
  *
@@ -16,22 +17,20 @@ class Observation
 {
 
     /**
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Image", mappedBy="observation")
-     */
-    private $images;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User", inversedBy="approuvedBys")
+     * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User")
+     * @ORM\JoinColumn(nullable=true)
      */
     private $approuvedBy;
 
     /**
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Taxrefv10", inversedBy="observations")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Taxrefv10")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $espece;
 
     /**
-     * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User", inversedBy="observations")
+     * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $author;
 
@@ -40,7 +39,6 @@ class Observation
      */
     public function __construct()
     {
-        $this->images = new \Doctrine\Common\Collections\ArrayCollection();
         $this->dateRecord = new \DateTime();
     }
 
@@ -103,9 +101,18 @@ class Observation
     private $description;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="image", type="text")
+     */
+    private $image;
+
+
+
+    /**
      * Get id
      *
-     * @return int
+     * @return integer
      */
     public function getId()
     {
@@ -187,7 +194,7 @@ class Observation
     /**
      * Set gpsLatitude
      *
-     * @param string $gpsLatitude
+     * @param float $gpsLatitude
      *
      * @return Observation
      */
@@ -201,7 +208,7 @@ class Observation
     /**
      * Get gpsLatitude
      *
-     * @return string
+     * @return float
      */
     public function getGpsLatitude()
     {
@@ -211,7 +218,7 @@ class Observation
     /**
      * Set gpsLongitude
      *
-     * @param string $gpsLongitude
+     * @param float $gpsLongitude
      *
      * @return Observation
      */
@@ -225,7 +232,7 @@ class Observation
     /**
      * Get gpsLongitude
      *
-     * @return string
+     * @return float
      */
     public function getGpsLongitude()
     {
@@ -235,7 +242,7 @@ class Observation
     /**
      * Set status
      *
-     * @param boolean $status
+     * @param string $status
      *
      * @return Observation
      */
@@ -249,7 +256,7 @@ class Observation
     /**
      * Get status
      *
-     * @return bool
+     * @return string
      */
     public function getStatus()
     {
@@ -281,37 +288,37 @@ class Observation
     }
 
     /**
-     * Set images
+     * Set image
      *
-     * @param string $images
+     * @param string $image
      *
      * @return Observation
      */
-    public function setImages($images)
+    public function setImage($image)
     {
-        $this->images = $images;
+        $this->image = $image;
 
         return $this;
     }
 
     /**
-     * Get images
+     * Get image
      *
      * @return string
      */
-    public function getImages()
+    public function getImage()
     {
-        return $this->images;
+        return $this->image;
     }
 
     /**
      * Set approuvedBy
      *
-     * @param string $approuvedBy
+     * @param \UserBundle\Entity\User $approuvedBy
      *
      * @return Observation
      */
-    public function setApprouvedBy($approuvedBy)
+    public function setApprouvedBy(\UserBundle\Entity\User $approuvedBy = null)
     {
         $this->approuvedBy = $approuvedBy;
 
@@ -321,7 +328,7 @@ class Observation
     /**
      * Get approuvedBy
      *
-     * @return string
+     * @return \UserBundle\Entity\User
      */
     public function getApprouvedBy()
     {
@@ -331,11 +338,11 @@ class Observation
     /**
      * Set espece
      *
-     * @param string $espece
+     * @param \AppBundle\Entity\Taxrefv10 $espece
      *
      * @return Observation
      */
-    public function setEspece($espece)
+    public function setEspece(\AppBundle\Entity\Taxrefv10 $espece)
     {
         $this->espece = $espece;
 
@@ -345,7 +352,7 @@ class Observation
     /**
      * Get espece
      *
-     * @return string
+     * @return \AppBundle\Entity\Taxrefv10
      */
     public function getEspece()
     {
@@ -355,11 +362,11 @@ class Observation
     /**
      * Set author
      *
-     * @param string $author
+     * @param \UserBundle\Entity\User $author
      *
      * @return Observation
      */
-    public function setAuthor($author)
+    public function setAuthor(\UserBundle\Entity\User $author)
     {
         $this->author = $author;
 
@@ -369,35 +376,10 @@ class Observation
     /**
      * Get author
      *
-     * @return string
+     * @return \UserBundle\Entity\User
      */
     public function getAuthor()
     {
         return $this->author;
-    }
-
-
-    /**
-     * Add image
-     *
-     * @param \AppBundle\Entity\Image $image
-     *
-     * @return Observation
-     */
-    public function addImage(\AppBundle\Entity\Image $image)
-    {
-        $this->images[] = $image;
-
-        return $this;
-    }
-
-    /**
-     * Remove image
-     *
-     * @param \AppBundle\Entity\Image $image
-     */
-    public function removeImage(\AppBundle\Entity\Image $image)
-    {
-        $this->images->removeElement($image);
     }
 }

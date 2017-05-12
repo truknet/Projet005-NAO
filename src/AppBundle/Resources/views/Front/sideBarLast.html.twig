@@ -4,9 +4,11 @@
     </div>
     <div class="panel-body">
         <ul>
-            <li>....</li>
-            <li>....</li>
-            <li>....</li>
+            {% for listLastObservation in listLastObservations %}
+                <li><a href="{{ path('view_one_observation', {'id': listLastObservation.id}) }}">{{ listLastObservation.title | truncate(50, false, '...') }}</a></li>
+            {% endfor %}
         </ul>
     </div>
 </div>
+
+

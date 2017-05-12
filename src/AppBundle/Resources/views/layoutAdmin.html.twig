@@ -15,21 +15,20 @@
 <body>
     {% block navbar %}{{ include("AppBundle:Admin:navbar.html.twig") }}{% endblock %}
     <div class="container-fluid">
-            <div class="row">
-                <div class="col-sm-3 col-md-2 sidebar">
-                    {{ include("AppBundle:Admin:sidebarleft.html.twig") }}
-                </div>
-                <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-                    {# On affiche tous les messages flash #}
-                    {% for key, messages in app.session.flashbag.all() %}
-                        {% for message in messages %}
-                            <div class="alert alert-{{ key }}">
-                                {{ message }}
-                            </div>
-                        {% endfor %}
+        <div class="row">
+            <div class="col-sm-3 col-md-2 sidebar">
+                {{ include("AppBundle:Admin:sidebarleft.html.twig") }}
+            </div>
+            <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+                {# On affiche tous les messages flash #}
+                {% for key, messages in app.session.flashbag.all() %}
+                    {% for message in messages %}
+                        <div class="alert alert-{{ key }}">
+                            {{ message }}
+                        </div>
                     {% endfor %}
-                    {% block body %}{% endblock %}
-                </div>
+                {% endfor %}
+                {% block body %}{% endblock %}
             </div>
         </div>
     </div>
@@ -48,19 +47,20 @@
         $(function () {
             $('.input-group.date').datetimepicker({
                 locale: "{{ app.request.locale }}",
-                format: 'DD MMMM YYYY'
+                format: 'DD/MM/YYYY'
             });
         });
     </script>
 
 <script src="{{ asset('js/button_retour.js') }}"></script>
-    {% block javascript %}
-        <script>
-            $(document).ready(function(){
-                $('[data-toggle="tooltip"]').tooltip();
-            });
-        </script>
-    {% endblock %}
+
+<script>
+    $(document).ready(function(){
+        $('[data-toggle="tooltip"]').tooltip();
+    });
+</script>
+
+{% block javascript %} {% endblock %}
 
 </body>
 </html>

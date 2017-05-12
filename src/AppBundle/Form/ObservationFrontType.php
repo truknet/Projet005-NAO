@@ -14,7 +14,7 @@ use AppBundle\Form\ImageType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 
 
-class ObservationType extends AbstractType
+class ObservationFrontType extends AbstractType
 {
     /**
      * {@inheritdoc}
@@ -22,12 +22,6 @@ class ObservationType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('dateRecord', DateTimeType::class, array(
-                'widget' => 'single_text',
-                'label' => "Date d'enregistrement",
-                'format' => 'dd/MM/yyyy',
-                'attr' => array('readonly' => 'readonly'),
-            ))
             ->add('dateObservation', DateTimeType::class, array(
                 'widget' => 'single_text',
                 'format' => 'dd/MM/yyyy',
@@ -39,17 +33,6 @@ class ObservationType extends AbstractType
             ))
             ->add('gpsLongitude', NumberType::class, array(
                 'scale' => 6,
-            ))
-            ->add('status', ChoiceType::class, array(
-                'choices' => array(
-                    'En attente' => 'waiting',
-                    'Validée' => 'valid',
-                    'Rejetée' => 'reject',
-                ),
-                'label' => 'Status',
-                'expanded' => true,
-                'multiple' => false,
-                'required' => true,
             ))
             ->add('description')
             ->add('image', FileType::class, array(

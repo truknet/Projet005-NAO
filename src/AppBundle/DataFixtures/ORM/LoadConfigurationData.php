@@ -15,8 +15,8 @@ class LoadConfigurationData extends AbstractFixture implements OrderedFixtureInt
     {
         $config = new Configuration();
         $config->setName('config1');
-        $config->setTheme('css/bootstrap.min.css');
-        $config->setThemeAdmin('css/bootstrap.min.css');
+        $config->setTheme('css/bootstrap-flatly/bootstrap.min.css');
+        $config->setThemeAdmin('css/bootstrap-slate/bootstrap.min.css');
 
         $manager->persist($config);
         $manager->flush();

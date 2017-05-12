@@ -1,10 +1,10 @@
 {% extends "AppBundle::layout1.html.twig" %}
-{% block title %}Affiche tous les oiseaux{% endblock %}
+{% block title %}Affiche toutes les espèces{% endblock %}
 {% block body %}
-    <h1>Affichage des oiseaux.</h1>
+    <h1>Affichage des espèces.</h1>
     <br>
     <div class="center">
-        <p>Total d'oiseaux : {{ pagination.getTotalItemCount }}</p>
+        <p>Total d'espèces : {{ pagination.getTotalItemCount }}</p>
     </div>
     <br>
     <table class="table table-striped">
@@ -26,7 +26,7 @@
                 <td>{{ oiseau.NomVern }}</td>
                 <td>
                     <p>
-                        <a class="btn btn-primary btn-xs" href="{{ path('view_one_bird', {'id': oiseau.id}) }}">Voir la fiche</a>
+                        <a class="btn btn-primary btn-xs" href="{{ path('view_one_species', {'id': oiseau.id}) }}">Voir la fiche</a>
                     </p>
                 </td>
             </tr>

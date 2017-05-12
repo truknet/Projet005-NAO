@@ -12,6 +12,7 @@ use AppBundle\Entity\Taxrefv10;
 use AppBundle\Form\Taxrefv10Type;
 use AppBundle\Entity\Observation;
 use AppBundle\Form\ObservationType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 
 class AdminController extends Controller
 {
@@ -206,6 +207,12 @@ class AdminController extends Controller
         $form = $this->get('form.factory')->create(ObservationType::class, $observation);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
+
+            $file = $observation->getImage();
+            $fileName = md5(uniqid()).'.'.$file->guessExtension();
+            $file->move($this->getParameter('uploads_images_directory'), $fileName);
+
+            $observation->setImage($fileName);
             $em->flush();
             $request->getSession()->getFlashBag()->add('success', "L'observation a bien été modifiée.");
             return $this->redirectToRoute('admin_view_one_observation', array('id' => $observation->getId()));

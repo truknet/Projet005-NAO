@@ -60,6 +60,11 @@ h2 {
 .center {
     text-align: center;
 }
+
+.max_center {
+    width: 100%;
+    text-align: center;
+}
 .navigation {
     text-align: center;
 }
@@ -74,7 +79,20 @@ h2 {
 }
 
 .title {
+    font-weight: bold;
     padding: 0px;
     margin: 0px;
 }
+
+.bold_title {
+    font-weight: bold;
+}
+
+h6.panel-title {
+    font-size: 14px;
+}
+.image_obs {
+    width: 200px;
+}
+
 
